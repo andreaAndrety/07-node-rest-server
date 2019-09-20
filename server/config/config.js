@@ -12,4 +12,4 @@ let urlDB;
 urlDB = 'mongodb + srv: //strider:dPfXAvq0cVIm497r@cluster0-r8bkc.mongodb.net/cafe';
 // }
 
-process.env.URLDB = url_DB;
+process.env.URL_DB = urlDB;
