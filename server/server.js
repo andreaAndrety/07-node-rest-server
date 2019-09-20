@@ -22,18 +22,22 @@ app.use(bodyParser.json());
 app.use(require('./rutas/usuario'));
 
 
-// mongoose.connect(process.env.URLDB, { useNewUrlParser: true
-// , useCreateIndex: true })
-//     .then(() => {
-//         //if (err) throw err;
-//         console.log("Base de datos online")
-//     }).catch(err ){}
+mongoose.connect(process.env.URLDB, {
+        useNewUrlParser: true,
+        useCreateIndex: true
+    })
+    .then(() => {
+        //if (err) throw err;
+        console.log("Base de datos online")
+    }).catch((err) => {
+        console.log(err);
+    });
 
 
-mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
-    if (err) throw err;
-    console.log("Base de datos online");
-});
+// mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
+//     if (err) throw err;
+//     console.log("Base de datos online");
+// });
 
 app.listen(process.env.PORT, () => {
     console.log('escuchando puerto 3000');
