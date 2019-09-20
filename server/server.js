@@ -1,7 +1,13 @@
 require('./config/config');
-//express nos ayuda a crear nuestro servidor 
+
+
 const express = require('express');
+
 const app = express();
+
+// cargar las librerias para la conexion a la base de datos mongobd
+const mongoose = require('mongoose');
+
 //este es para procesar la peticiones post y poderlas leer facilmente
 const bodyParser = require('body-parser');
 
@@ -11,41 +17,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+//vamos a llamar el archivo de usuario para poder usarlo
 
-//
-app.get('/', function(req, res) {
-    res.json('Hello World');
-});
-app.get('/usuario', function(req, res) {
-    res.json('get Usuario');
-});
-
-app.post('/usuario', function(req, res) {
-    let body = req.body;
-
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'el nombre es necesario'
-        });
-    } else {
-
-        res.json({
-            persona: body
-        });
-    }
+app.use(require('./rutas/usuario'));
 
 
-});
-app.put('/usuario/:id', function(req, res) {
-    let id = req.param.id;
+// mongoose.connect(process.env.URLDB, { useNewUrlParser: true
+// , useCreateIndex: true })
+//     .then(() => {
+//         //if (err) throw err;
+//         console.log("Base de datos online")
+//     }).catch(err ){}
 
-    req.json({
-        id
-    });
-});
-app.delete('/usuario', function(req, res) {
-    res.json('delete Usuario');
+
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
+    if (err) throw err;
+    console.log("Base de datos online");
 });
 
 app.listen(process.env.PORT, () => {
