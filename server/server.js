@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(require('./rutas/usuario'));
 
 
-mongoose.connect(process.env.URLDB, {
+mongoose.connect(process.env.URL_DB, {
         useNewUrlParser: true,
         useCreateIndex: true
     })
