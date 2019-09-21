@@ -24,7 +24,8 @@ app.use(require('./rutas/usuario'));
 
 mongoose.connect(process.env.URL_DB, {
         useNewUrlParser: true,
-        useCreateIndex: true
+        useCreateIndex: true,
+        useUnifiedTopology: true
     })
     .then(() => {
         //if (err) throw err;
