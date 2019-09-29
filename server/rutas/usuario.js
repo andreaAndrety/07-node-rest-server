@@ -17,11 +17,11 @@ app.get('/', function(req, res) {
 });
 app.get('/usuario', verificaToken, function(req, res) {
 
-    return res.json({
-        usuario: req.usuario,
-        nombre: req.usuario.nombre,
-        email: req.usuario.email
-    });
+    // return res.json({
+    //     usuario: req.usuario,
+    //     nombre: req.usuario.nombre,
+    //     email: req.usuario.email
+    // });
 
     let desde = req.query.desde || 0;
 
@@ -84,7 +84,7 @@ app.post('/usuario', [verificaToken, verificaAdminRole], function(req, res) {
 
 });
 app.put('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
-    let id = req.param.id;
+    let id = req.params.id;
     let body = _.pick(req.body[
         'nombre',
         'email',
