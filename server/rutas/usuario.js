@@ -1,6 +1,10 @@
 //express nos ayuda a crear nuestro servidor 
 const express = require('express');
 const Usuario = require('../models/usuario');
+
+const { verificaToken, verificaAdminRole } = require('../middlewares/autenticacion');
+
+
 const bcrypt = require('bcryptjs');
 const _ = require('underscore');
 
@@ -11,7 +15,14 @@ const app = express();
 app.get('/', function(req, res) {
     res.json('Hello World');
 });
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, function(req, res) {
+
+    return res.json({
+        usuario: req.usuario,
+        nombre: req.usuario.nombre,
+        email: req.usuario.email
+    });
+
     let desde = req.query.desde || 0;
 
     let limite = req.query.limite || 5;
@@ -44,7 +55,7 @@ app.get('/usuario', function(req, res) {
 });
 
 //insrtar registros
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdminRole], function(req, res) {
     let body = req.body;
 
     let usuario = new Usuario({
@@ -72,7 +83,7 @@ app.post('/usuario', function(req, res) {
     });
 
 });
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
     let id = req.param.id;
     let body = _.pick(req.body[
         'nombre',
@@ -130,7 +141,7 @@ app.put('/usuario/:id', function(req, res) {
 //     });
 
 // });7
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
 
     let id = req.params.id;
     let cambiaEstado = { estado: false }

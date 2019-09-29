@@ -1,9 +1,36 @@
+//======================
 //puerto 
-
+//======================
 process.env.PORT = process.env.PORT || 3000;
 
+
+
+//======================
 //entorno
+//======================
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+
+
+//======================
+//vencimiento del token
+//======================
+// 60 segundo
+//60 minutos
+//24 horas
+//30 dias
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+
+
+//======================
+//SEED autentication
+//======================
+process.env.SEMILLA = process.env.SEMILLA || 'este-es-el-seed-desarrollo';
+//para que esto funcione en produccion se declara una variable en 
+//heroku con la informacion 
+
+//======================
+//bases de datos
+//======================
 
 let urlDB;
 

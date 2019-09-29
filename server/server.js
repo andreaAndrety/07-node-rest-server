@@ -17,9 +17,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-//vamos a llamar el archivo de usuario para poder usarlo
+//vamos a llamar el archivo de index para poder usarlo
 
-app.use(require('./rutas/usuario'));
+app.use(require('./rutas/index'));
 
 
 mongoose.connect(process.env.URL_DB, {
@@ -41,5 +41,5 @@ mongoose.connect(process.env.URL_DB, {
 // });
 
 app.listen(process.env.PORT, () => {
-    console.log('escuchando puerto 3000');
+    console.log('escuchando puerto ', process.env.PORT);
 });
