@@ -5,6 +5,7 @@ const express = require('express');
 
 const app = express();
 
+const path = require('path');
 // cargar las librerias para la conexion a la base de datos mongobd
 const mongoose = require('mongoose');
 
@@ -17,8 +18,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-//vamos a llamar el archivo de index para poder usarlo
+//habilitar la carpeta public
+app.use(express.static(path.resolve(__dirname, '../public')));
 
+//vamos a llamar el archivo de index para poder usarlo
 app.use(require('./rutas/index'));
 
 
